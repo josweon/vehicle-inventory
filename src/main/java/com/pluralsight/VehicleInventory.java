@@ -33,7 +33,7 @@ public class VehicleInventory {
                 listAllVehicles(cars);
                 break;
             case 2:
-                findVehiclesByMakeModel();
+                findVehiclesByMakeModel(cars, scanner);
                 break;
             //...
 
@@ -47,8 +47,15 @@ public class VehicleInventory {
         }
     }
 
-    public static void findVehiclesByMakeModel() {
-        Scanner input = new Scanner(System.in);
-
+    public static void findVehiclesByMakeModel(Vehicle[] cars, Scanner input) {
+        input.nextLine();
+        System.out.print("Search for makeModel: ");
+        String search = input.nextLine();
+        for (Vehicle car: cars) {
+            String currentMakeModel = car.getMakeModel();
+            if (currentMakeModel.contains(search)) System.out.printf("%s is in lot no.%d%n", currentMakeModel,
+                    (filledSpots + 1));
+        }
+        System.out.println("Car not in the lot");
     }
 }
