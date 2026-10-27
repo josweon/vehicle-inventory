@@ -19,7 +19,7 @@ public class VehicleInventory {
         cars[5] = new Vehicle(101126, "Jeep Wrangler", "Yellow", 30000, 16000);
 
         do {
-            filledSpots = cars.length;
+            filledSpots = getFilledSpots(cars);
             System.out.println("What do you want to do?\n");
             System.out.println("  1 - List all vehicles");
             System.out.println("  2 - Search by make/model");
@@ -83,10 +83,10 @@ public class VehicleInventory {
         double price = Double.parseDouble(input.nextLine());
 
         System.out.println("Cars within budget: ");
-        for (Vehicle car: cars) {
-            double carPrice = car.getPrice();
+        for (int i = 0; i < filledSpots; i++) {
+            double carPrice = cars[i].getPrice();
             if (price <= carPrice) {
-                System.out.printf("{Make: %s, Price: $%.2f}%n", car.getMakeModel(), car.getPrice());
+                System.out.printf("{Make: %s, Price: $%.2f}%n", cars[i].getMakeModel(), cars[i].getPrice());
             }
         }
     }
@@ -97,5 +97,15 @@ public class VehicleInventory {
 
     public static void addNewVehicle() {
 
+    }
+
+    public static int getFilledSpots(Vehicle[] cars) {
+        int filled = 0;
+        for (Vehicle car : cars) {
+            if( car != null) {
+                filled ++;
+            }
+        }
+        return filled;
     }
 }
