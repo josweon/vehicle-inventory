@@ -45,7 +45,13 @@ public class VehicleInventory {
                     break;
                 case 5:
                     addNewVehicle();
-
+                    break;
+                case 6:
+                    System.out.println("--Quit");
+                    break;
+                default:
+                    System.out.println("--Invalid input");
+                    break;
             }
         } while (command != 6);
         System.out.println("---");
@@ -68,5 +74,17 @@ public class VehicleInventory {
                     (filledSpots + 1));
         }
         System.out.println("Car not in the lot");
+    }
+
+    public static void findPriceRange() {
+
+    }
+
+    public static void findCarByColor() {
+
+    }
+
+    public static void addNewVehicle() {
+
     }
 }
