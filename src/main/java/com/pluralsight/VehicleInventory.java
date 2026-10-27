@@ -19,6 +19,7 @@ public class VehicleInventory {
         cars[5] = new Vehicle(101126, "Jeep Wrangler", "Yellow", 30000, 16000);
 
         do {
+            filledSpots = cars.length;
             System.out.println("What do you want to do?\n");
             System.out.println("  1 - List all vehicles");
             System.out.println("  2 - Search by make/model");
@@ -38,7 +39,7 @@ public class VehicleInventory {
                     findVehiclesByMakeModel(cars, scanner);
                     break;
                 case 3:
-                    findPriceRange();
+                    findPriceRange(cars, scanner);
                     break;
                 case 4:
                     findCarByColor();
@@ -76,8 +77,18 @@ public class VehicleInventory {
         System.out.println("Car not in the lot");
     }
 
-    public static void findPriceRange() {
+    public static void findPriceRange(Vehicle[] cars, Scanner input) {
+        input.nextLine();
+        System.out.print("Enter Price Range(top): ");
+        double price = Double.parseDouble(input.nextLine());
 
+        System.out.println("Cars within budget: ");
+        for (Vehicle car: cars) {
+            double carPrice = car.getPrice();
+            if (price <= carPrice) {
+                System.out.printf("{Make: %s, Price: $%.2f}%n", car.getMakeModel(), car.getPrice());
+            }
+        }
     }
 
     public static void findCarByColor() {
