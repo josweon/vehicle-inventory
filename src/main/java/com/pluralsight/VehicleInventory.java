@@ -42,7 +42,7 @@ public class VehicleInventory {
                     findPriceRange(cars, scanner);
                     break;
                 case 4:
-                    findCarByColor();
+                    findCarByColor(cars, scanner);
                     break;
                 case 5:
                     addNewVehicle();
@@ -91,8 +91,15 @@ public class VehicleInventory {
         }
     }
 
-    public static void findCarByColor() {
+    public static void findCarByColor(Vehicle[] cars, Scanner input) {
+        input.nextLine();
+        System.out.print("Search for Car by Color: ");
+        String search = input.nextLine();
 
+        for (int i = 0; i < filledSpots; i++) {
+            String currentCarColor = cars[i].getColor();
+            if (currentCarColor.contains(search)) System.out.printf("%s is in lot no.%d, Make: %s%n", currentCarColor, (i+1), cars[i].getMakeModel());
+        }
     }
 
     public static void addNewVehicle() {
