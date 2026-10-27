@@ -45,7 +45,7 @@ public class VehicleInventory {
                     findCarByColor(cars, scanner);
                     break;
                 case 5:
-                    addNewVehicle();
+                    addNewVehicle(cars, scanner);
                     break;
                 case 6:
                     System.out.println("--Quit");
@@ -98,12 +98,37 @@ public class VehicleInventory {
 
         for (int i = 0; i < filledSpots; i++) {
             String currentCarColor = cars[i].getColor();
-            if (currentCarColor.contains(search)) System.out.printf("%s is in lot no.%d, Make: %s%n", currentCarColor, (i+1), cars[i].getMakeModel());
+            if (currentCarColor.contains(search)) System.out.printf("%s is in lot no.%d, Make: %s%n", currentCarColor,
+                    (i+1), cars[i].getMakeModel());
         }
     }
 
-    public static void addNewVehicle() {
+    public static void addNewVehicle(Vehicle[] cars, Scanner input) {
+        input.nextLine();
+        System.out.print("Add a new car to the lot (vehicleID, makeModel, color, odometer, price): ");
+        String details = input.nextLine();
+        String[] carSpecs = details.trim().split(", ");
 
+        if (getFilledSpots(cars) >= cars.length) {
+            System.out.println("No more open spaces.");
+        } else {
+            long vehicleId = Long.parseLong(carSpecs[0].trim());
+            String makeModel = carSpecs[1];
+            String color = carSpecs[2];
+            int odometer = Integer.parseInt(carSpecs[3].trim());
+            double price = Double.parseDouble(carSpecs[4].trim());
+
+            Vehicle car = new Vehicle(
+                    vehicleId,
+                    makeModel,
+                    color,
+                    odometer,
+                    price);
+
+            cars[filledSpots] = car;
+
+            System.out.printf("Added %s to the lot%n", makeModel);
+        }
     }
 
     public static int getFilledSpots(Vehicle[] cars) {
